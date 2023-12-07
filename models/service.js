@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, ObjectId } from "mongoose";
 const service = new Schema({
     name: {
         type: String,
@@ -20,5 +20,10 @@ const service = new Schema({
         type: String,
         required: true,
     },
+    user: {
+        type: ObjectId,
+        ref: 'login',
+        required: true
+    }
 })
 export default model('service', service)
