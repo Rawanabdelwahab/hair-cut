@@ -16,11 +16,12 @@ export const checkLogin = async (req, res) => {
     const { email, password } = req.body
     const logged = await loginModel.findOne({ email })
     const isCorrectPassword = bcrypt.compareSync(password, logged.password)
-   
+    //console.log(isCorrectPassword)
     const data ={
         _id :logged._id,
         email:logged.email,
     }
+    //console.log(data)
     const token=jwt.sign(data,'shhhhh')
     // console.log(token)
     if (isCorrectPassword) {

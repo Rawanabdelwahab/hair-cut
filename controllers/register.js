@@ -10,6 +10,7 @@ export const register = async (req, res) => {
     const { firstName, lastName, email, password } = req.body
     const salt = bcrypt.genSaltSync(10)
     const encryptedPassword = bcrypt.hashSync(password, salt)
+    //console.log(encryptedPassword)
     await loginModel.create({ firstName, lastName, email, password: encryptedPassword })
     res.json()
 }
