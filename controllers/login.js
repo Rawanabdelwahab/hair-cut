@@ -1,5 +1,5 @@
 import loginModel from '../models/login.js'
-import  bcrypt from "bcrypt"
+import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 export const login = async (req, res) => {
     const loginuser = await loginModel.find({}).lean()
@@ -17,17 +17,17 @@ export const checkLogin = async (req, res) => {
     const logged = await loginModel.findOne({ email })
     const isCorrectPassword = bcrypt.compareSync(password, logged.password)
     //console.log(isCorrectPassword)
-    const data ={
-        _id :logged._id,
-        email:logged.email,
+    const data = {
+        _id: logged._id,
+        email: logged.email,
     }
     //console.log(data)
-    const token=jwt.sign(data,'shhhhh')
+    const token = jwt.sign(data, 'shhhhh')
     // console.log(token)
     if (isCorrectPassword) {
         res.json({ token })
     }
     else
         res.status(404).json({ found: false })
-   
+
 }
